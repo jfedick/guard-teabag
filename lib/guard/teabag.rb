@@ -58,6 +58,10 @@ module Guard
         Notifier.notify("Failed", title: "Teabag Guard", image: :failed)
       else
         Notifier.notify("Success", title: "Teabag Guard", image: :success)
+        if @options[:all_after_pass]
+          @runner = Runner.new(@options)
+          @runner.run_all
+        end
       end
 
       #original_paths = paths.dup
